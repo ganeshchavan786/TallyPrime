@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: Google Apps Script API for Tally_db Google Sheet
+  description: CRUD API for managing data in the Tally_db Google Sheet.
+  version: 1.0.0
+servers:
+  - url: https://script.google.com/macros/s/AKfycbwwX58YYdD0mOXqWK-xCfxyDr93hHUzx1R07fD5WtCO6dwUDqPyecTt2_DMWSh2DFor/exec
+paths:
+  /data:
+    get:
+      summary: Get all data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+    post:
+      summary: Add new data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Data added successfully
+  /data/{id}:
+    put:
+      summary: Update existing data
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the data to update
+          schema:
+            type: string
+        - in: body
+          name: body
+          description: Data to update
+          required: true
+          schema:
+            type: object
+      responses:
+        '200':
+          description: Data updated successfully
+    delete:
+      summary: Delete data
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the data to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Data deleted successfully
